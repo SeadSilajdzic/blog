@@ -13,7 +13,8 @@
                 <th>Category</th>
                 <th>Content</th>
                 <th>Created</th>
-                <th>Trash</th>
+                <th>Restore</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -45,10 +46,20 @@
                     </td>
 
                     <td>
-                        <form action="{{ route('posts.trash', ['post' => $post->id]) }}" method="get">
+                        <form action="{{ route('posts.restore', ['post' => $post->id]) }}" method="get">
                             @csrf
 
-                            <button type="submit" name="btn_trashPost" class="btn btn-sm btn-outline-danger">Trash</button>
+                            <button type="submit" name="btn_restorePost" class="btn btn-sm btn-outline-success">Restore</button>
+
+                        </form>
+                    </td>
+
+                    <td>
+                        <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="post">
+                            @csrf
+                            @method('Delete')
+
+                            <button type="submit" name="btn_deletePost" class="btn btn-sm btn-outline-danger">Delete</button>
 
                         </form>
                     </td>

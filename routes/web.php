@@ -23,7 +23,23 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
+    Route::get('/posts/trash/{post}', [
+       'uses' => 'PostController@trash',
+       'as' => 'posts.trash'
+    ]);
+
+    Route::get('/posts/trashed', [
+        'uses' => 'PostController@trashed',
+        'as' => 'posts.trashed'
+    ]);
+
+    Route::get('/posts/restore/{post}', [
+       'uses' => 'PostController@restore',
+       'as' => 'posts.restore'
+    ]);
+
     Route::resource('/posts', 'PostController');
+
     Route::resource('/category', 'CategoriesController');
 
 });

@@ -66,6 +66,10 @@
                                     <a class="dropdown-item" href="{{ route('posts.create') }}">
                                         Create post
                                     </a>
+
+                                    <a class="dropdown-item" href="{{ route('posts.trashed') }}">
+                                        Trashed posts
+                                    </a>
                                 </div>
                             </li>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -16,6 +17,11 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+
+        if($posts->count() == 0){
+            return redirect()->route('posts.create')->with('toast_warning', 'You do not have any posts yet. Make some here!');
+        }
+
         return view('admin.posts.index', ['posts' => $posts]);
     }
 
@@ -27,6 +33,10 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+
+        if($categories->count() == 0){
+            return redirect()->route('category.create')->with('toast_warning', 'You do not have any categories yet. Make some here!');
+        }
 
         return view('admin.posts.create', ['categories' => $categories]);
     }
@@ -57,6 +67,7 @@ class PostController extends Controller
             'content' => $request->content,
             'featured' => '/uploads/posts/' . $featured_new_name,
             'category_id' => $request->category_id,
+            'slug' => Str::slug($request->title)
         ]);
 
         return redirect()->route('posts.index')->with('toast_success', 'Post has been created');
@@ -82,7 +93,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.posts.edit');
     }
 
     /**
@@ -105,6 +116,61 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::withTrashed()->where('id', $id)->first();
+        $post->forceDelete();
+
+        $trashed = Post::onlyTrashed()->get();
+
+        if($trashed->count() == 0)
+        {
+            return redirect()->route('posts.index')->with('toast_error', 'Your post has been deleted');
+        }
+        else
+        {
+            return redirect()->back()->with('toast_error', 'Your post has been deleted');
+        }
+
     }
+
+    /**
+     * This function is responsible for trashing posts
+     *
+     * */
+    public function trash($id)
+    {
+        Post::findOrFail($id)->delete();
+
+        return redirect()->route('posts.index')->with('toast_info', 'Your post has been trashed');
+    }
+
+    /**
+     * This function is displaying trashed posts
+     *
+     * */
+    public function trashed(){
+        $posts = Post::onlyTrashed()->get();
+
+        return view('admin.posts.trashed', ['posts' => $posts]);
+    }
+
+    public function restore($id){
+        $post = Post::withTrashed()->where('id', $id)->first();
+        $post->restore();
+
+        $trashed = Post::onlyTrashed()->get();
+
+        if($trashed->count() == 0)
+        {
+            return redirect()->route('posts.index')->with('toast_success', 'Your post has been restored');
+        }
+        else
+        {
+            return redirect()->back()->with('toast_success', 'Your post has been restored');
+        }
+
+
+    }
+
+
+
 }

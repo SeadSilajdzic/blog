@@ -15,6 +15,11 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::all();
+
+        if($categories->count() == 0){
+            return redirect()->route('categories.create')->with('toast_warning', 'You do not have any categories yet. Make some here!');
+        }
+
         return view('admin.categories.index', ['categories' => $categories]);
     }
 
