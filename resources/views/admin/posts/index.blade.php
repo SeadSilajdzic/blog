@@ -13,6 +13,7 @@
                 <th>Category</th>
                 <th>Content</th>
                 <th>Created</th>
+                <th>Edit</th>
                 <th>Trash</th>
             </tr>
             </thead>
@@ -42,6 +43,15 @@
 
                     <td>
                         {{ $post->created_at->diffForHumans() }}
+                    </td>
+
+                    <td>
+                        <form action="{{ route('posts.edit', ['post' => $post->id]) }}" method="get">
+                            @csrf
+
+                            <button type="submit" name="btn_editPost" class="btn btn-sm btn-outline-info">Edit</button>
+
+                        </form>
                     </td>
 
                     <td>
