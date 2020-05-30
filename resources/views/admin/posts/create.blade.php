@@ -25,7 +25,7 @@
                 <option disabled selected>List of available post categories</option>
                 @foreach($categories as $category)
 
-                    <option value="{{ $catesgory->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
 
                 @endforeach
             </select>

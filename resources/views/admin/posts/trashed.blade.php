@@ -69,9 +69,8 @@
             @endforeach
             </tbody>
         </table>
-
     @else
-        <h2 class="text-center">There are no any posts. Make some <a href="{{ route('posts.create') }}">here</a></h2>
+        <h2 class="text-center"><a href="{{ route('home') }}">Go home</a></h2>
     @endif
 
 @endsection
