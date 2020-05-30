@@ -26,10 +26,31 @@
                 <option disabled>List of available post categories</option>
                 @foreach($categories as $category)
 
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}"
+
+                    @if($post->category->id == $category->id)
+                        selected
+                    @endif
+
+                    >{{ $category->name }}</option>
 
                 @endforeach
             </select>
+        </div>
+
+        <div class="form-group">
+            <label for="tags">Select tags</label>
+            @foreach($tags as $tag)
+                <div class="form-check">
+                    <input type="checkbox" name="tags[]" class="form-check-input" id="tags" value="{{ $tag->id }}"
+                    @foreach($post->tags as $t)
+                        @if($tag->id == $t->id)
+                            checked
+                       @endif
+                    @endforeach>
+                    <label class="form-check-label" for="tags">{{ $tag->tag }}</label>
+                </div>
+            @endforeach
         </div>
 
         <div class="form-group">

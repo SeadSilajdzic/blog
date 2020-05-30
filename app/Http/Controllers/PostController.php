@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -33,12 +34,15 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
         if($categories->count() == 0){
             return redirect()->route('category.create')->with('toast_warning', 'You do not have any categories yet. Make some here!');
+        } elseif ($tags->count() == 0){
+            return redirect()->route('tags.create')->with('toast_warning', 'You do not have any tags yet. Make some here!');
         }
 
-        return view('admin.posts.create', ['categories' => $categories]);
+        return view('admin.posts.create', ['categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -54,6 +58,7 @@ class PostController extends Controller
            'content' => 'required|min:15',
             'featured' => 'required|image',
             'category_id' => 'required',
+            'tags' => 'required'
         ]);
 
         $featured = $request->featured;
@@ -67,8 +72,10 @@ class PostController extends Controller
             'content' => $request->content,
             'featured' => '/uploads/posts/' . $featured_new_name,
             'category_id' => $request->category_id,
-            'slug' => Str::slug($request->title)
+            'slug' => Str::slug($request->title),
         ]);
+
+        $post->tags()->attach($request->tags);
 
         return redirect()->route('posts.index')->with('toast_success', 'Post has been created');
 
@@ -95,7 +102,8 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $categories = Category::all();
-        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories]);
+        $tags = Tag::all();
+        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -110,7 +118,7 @@ class PostController extends Controller
         $this->validate($request, [
            'title' => 'required|min:5|max:255',
            'content' => 'required|min:5',
-           'category_id' => 'required'
+           'category_id' => 'required',
         ]);
 
         $post = Post::findOrFail($id);
@@ -130,6 +138,8 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
 
         $post->save();
+
+        $post->tags()->sync($request->tags);
 
         return redirect()->route('posts.index')->with('toast_success', 'Post has been updated');
     }

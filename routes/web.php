@@ -42,6 +42,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
     Route::resource('/category', 'CategoriesController');
 
+    Route::resource('/tags', 'TagsController');
+
 });
 
 
