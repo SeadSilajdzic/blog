@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Auth::routes();
@@ -43,6 +43,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::resource('/category', 'CategoriesController');
 
     Route::resource('/tags', 'TagsController');
+
+    Route::get('/users/admin/{user}', [
+        'uses' => 'UsersController@admin',
+        'as' => 'users.admin'
+    ])->middleware('admin');
+
+    Route::get('/users/not-admin/{user}', [
+        'uses' => 'UsersController@not_admin',
+        'as' => 'users.not.admin'
+    ])->middleware('admin');
+
+    Route::resource('/users', 'UsersController');
+    Route::resource('/user/profile', 'ProfilesController');
 
 });
 

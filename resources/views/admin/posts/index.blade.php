@@ -7,23 +7,31 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>ID</th>
+                @if(Auth::user()->admin)
+                    <th>ID</th>
+                @endif
                 <th>Featured Image</th>
                 <th>Title</th>
                 <th>Category</th>
                 <th>Content</th>
                 <th>Created</th>
-                <th>Edit</th>
-                <th>Trash</th>
+                @if(Auth::user()->admin)
+                    <th>Edit</th>
+                    <th>Trash</th>
+                @endif
+
             </tr>
             </thead>
             <tbody>
             @foreach($posts as $post)
 
                 <tr>
-                    <td>
-                        {{ $post->id }}
-                    </td>
+                    @if(Auth::user()->admin)
+                        <td>
+                            {{ $post->id }}
+                        </td>
+                    @endif
+
 
                     <td>
                         <img src="{{ $post->featured }}" alt="Featured image" style="width: 150px; height: 80px;">
@@ -45,23 +53,25 @@
                         {{ $post->created_at->diffForHumans() }}
                     </td>
 
-                    <td>
-                        <form action="{{ route('posts.edit', ['post' => $post->id]) }}" method="get">
-                            @csrf
+                    @if(Auth::user()->admin)
+                        <td>
+                            <form action="{{ route('posts.edit', ['post' => $post->id]) }}" method="get">
+                                @csrf
 
-                            <button type="submit" name="btn_editPost" class="btn btn-sm btn-outline-info">Edit</button>
+                                <button type="submit" name="btn_editPost" class="btn btn-sm btn-outline-info">Edit</button>
 
-                        </form>
-                    </td>
+                            </form>
+                        </td>
 
-                    <td>
-                        <form action="{{ route('posts.trash', ['post' => $post->id]) }}" method="get">
-                            @csrf
+                        <td>
+                            <form action="{{ route('posts.trash', ['post' => $post->id]) }}" method="get">
+                                @csrf
 
-                            <button type="submit" name="btn_trashPost" class="btn btn-sm btn-outline-danger">Trash</button>
+                                <button type="submit" name="btn_trashPost" class="btn btn-sm btn-outline-danger">Trash</button>
 
-                        </form>
-                    </td>
+                            </form>
+                        </td>
+                    @endif
 
                 </tr>
 

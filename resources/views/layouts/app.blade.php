@@ -53,61 +53,87 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Posts
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('posts.index') }}">
-                                        All posts
+                            @if(Auth::user()->admin)
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Users
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('posts.create') }}">
-                                        Create post
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item" href="{{ route('users.index') }}">
+                                            All users
+                                        </a>
+
+                                        <a class="dropdown-item" href="{{ route('users.create') }}">
+                                            Create user
+                                        </a>
+
+                                    </div>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Posts
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('posts.trashed') }}">
-                                        Trashed posts
-                                    </a>
-                                </div>
-                            </li>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('posts.index') }}">
+                                            All posts
+                                        </a>
 
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Categories
-                                </a>
+                                        <a class="dropdown-item" href="{{ route('posts.create') }}">
+                                            Create post
+                                        </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('posts.trashed') }}">
+                                            Trashed posts
+                                        </a>
+                                    </div>
+                                </li>
 
-                                    <a class="dropdown-item" href="{{ route('category.index') }}">
-                                        All categories
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('category.create') }}">
-                                        Create category
-                                    </a>
-
-                                </div>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Tags
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                    <a class="dropdown-item" href="{{ route('tags.index') }}">
-                                        All tags
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Categories
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('tags.create') }}">
-                                        Create tag
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item" href="{{ route('category.index') }}">
+                                            All categories
+                                        </a>
+
+                                        <a class="dropdown-item" href="{{ route('category.create') }}">
+                                            Create category
+                                        </a>
+
+                                    </div>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Tags
                                     </a>
 
-                                </div>
-                            </li>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item" href="{{ route('tags.index') }}">
+                                            All tags
+                                        </a>
+
+                                        <a class="dropdown-item" href="{{ route('tags.create') }}">
+                                            Create tag
+                                        </a>
+
+                                    </div>
+                                </li>
+                            @else
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('posts.index') }}">Blog</a>
+                                </li>
+
+                            @endif
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -115,6 +141,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('profile.index') }}">Profile</a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

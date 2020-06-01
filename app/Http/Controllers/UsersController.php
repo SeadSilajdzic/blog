@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Tag;
+use App\Profile;
+use App\User;
 use Illuminate\Http\Request;
 
-class TagsController extends Controller
+class UsersController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('admin');
@@ -19,10 +21,8 @@ class TagsController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
-
-        return view('admin.tags.index', ['tags' => $tags]);
-
+        $users = User::all();
+        return view('admin.users.index', ['users' => $users]);
     }
 
     /**
@@ -32,7 +32,7 @@ class TagsController extends Controller
      */
     public function create()
     {
-        return view('admin.tags.create');
+        return view('admin.users.create');
     }
 
     /**
@@ -44,14 +44,22 @@ class TagsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'tag' => 'required|min:3',
+            'name' => 'required',
+            'email' => 'required|email'
         ]);
 
-        Tag::create([
-            'tag' => $request->tag
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt('password')
         ]);
 
-        return redirect()->route('tags.create')->with('toast_success', 'Tag has been created');
+        $profile = Profile::create([
+            'user_id' => $user->id,
+            'avatar' => 'uploads/avatars/default.png'
+        ]);
+
+        return redirect()->route('users.index')->with('toast_success', 'User has been created');
     }
 
     /**
@@ -73,8 +81,7 @@ class TagsController extends Controller
      */
     public function edit($id)
     {
-        $tag = Tag::findOrFail($id);
-        return view('admin.tags.edit', ['tag' => $tag]);
+        //
     }
 
     /**
@@ -86,17 +93,7 @@ class TagsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tag = Tag::findOrFail($id);
-
-        $this->validate($request, [
-            'tag' => 'required|min:3',
-        ]);
-
-        $tag->tag = $request->tag;
-
-        $tag->save();
-
-        return redirect()->route('tags.index')->with('toast_info', 'Tag has been updated');
+        //
     }
 
     /**
@@ -107,8 +104,23 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        Tag::destroy($id);
+        User::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'User has been deleted');
+    }
 
-        return redirect()->route('tags.index')->with('toast_error', 'Tag has been deleted');
+    public function admin($id){
+        $user = User::findOrFail($id);
+        $user->admin = 1;
+        $user->save();
+
+        return redirect()->back()->with('success', 'New admin added');
+    }
+
+    public function not_admin($id){
+        $user = User::findOrFail($id);
+        $user->admin = 0;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Admin removed');
     }
 }

@@ -15,14 +15,14 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default('uploads/avatars/default.png');
             $table->integer('user_id');
-            $table->text('about')->nullable();
-            $table->string('facebook')->nullable();
-            $table->string('linkedin');
-            $table->string('youtube');
-            $table->string('github');
-            $table->string('instagram');
+            $table->text('about')->default('Hello there!');
+            $table->string('facebook')->default('https://www.facebook.com');
+            $table->string('linkedin')->default('https://www.linkedin.com');
+            $table->string('youtube')->default('https://www.youtube.com');
+            $table->string('github')->default('https://www.github.com');
+            $table->string('instagram')->default('https://www.instagram.com');
             $table->timestamps();
         });
     }
