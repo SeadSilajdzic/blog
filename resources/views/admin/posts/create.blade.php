@@ -43,14 +43,12 @@
 
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+            <textarea name="content" id="summernote" cols="30" rows="10" class="form-control"></textarea>
         </div>
 
         <div class="form-group">
             <button type="submit" name="btn-createPost" class="btn btn-outline-success btn-block">Create post</button>
         </div>
     </form>
-
-    @include('admin.includes.errors')
 
 @endsection

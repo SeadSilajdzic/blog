@@ -45,13 +45,17 @@
                         </td>
 
                         <td>
-                            <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="post">
-                                @csrf
-                                @method('DELETE')
+                            @if(Auth::id() != $user->id)
+                                <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
 
-                                <button type="submit" name="btn_deleteUser" class="btn btn-sm btn-outline-danger">Delete</button>
+                                    <button type="submit" name="btn_deleteUser" class="btn btn-sm btn-outline-danger">Delete</button>
 
-                            </form>
+                                </form>
+                            @else
+                                <p>This is your account</p>
+                            @endif
                         </td>
 
                     @else

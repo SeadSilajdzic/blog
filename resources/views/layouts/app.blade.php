@@ -21,6 +21,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('styles')
 
 </head>
 <body>
@@ -127,6 +128,12 @@
 
                                     </div>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('settings') }}">
+                                        Settings
+                                    </a>
+                                </li>
                             @else
 
                                 <li class="nav-item">
@@ -164,6 +171,8 @@
             @yield('content')
         </main>
     </div>
+
+    @yield('script')
 
     @include('sweetalert::alert')
 </body>

@@ -8,7 +8,7 @@
 
     <form action="{{ route('profile.update', ['profile' => $user->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
+        @method('PATCH')
 
         <div class="form-group">
             <label for="name">Name</label>
@@ -68,3 +68,4 @@
     @include('admin.includes.errors')
 
 @endsection
+

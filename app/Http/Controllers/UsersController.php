@@ -105,7 +105,7 @@ class UsersController extends Controller
     public function destroy($id)
     {
         User::findOrFail($id)->delete();
-        return redirect()->back()->with('success', 'User has been deleted');
+        return redirect()->back()->with('warning', 'User has been deleted');
     }
 
     public function admin($id){
@@ -121,6 +121,6 @@ class UsersController extends Controller
         $user->admin = 0;
         $user->save();
 
-        return redirect()->back()->with('success', 'Admin removed');
+        return redirect()->back()->with('warning', 'Admin removed');
     }
 }

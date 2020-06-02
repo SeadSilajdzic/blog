@@ -57,6 +57,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::resource('/users', 'UsersController');
     Route::resource('/user/profile', 'ProfilesController');
 
+    Route::get('/settings', [
+        'uses' => 'SettingsController@index',
+        'as' => 'settings'
+    ])->middleware('admin');
+
+    Route::get('/settings/update', [
+        'uses' => 'SettingsController@update',
+        'as' => 'settings.update'
+    ])->middleware('admin');
 });
 
 

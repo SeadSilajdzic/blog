@@ -146,7 +146,7 @@ class PostController extends Controller
 
         $post->tags()->sync($request->tags);
 
-        return redirect()->route('posts.index')->with('toast_success', 'Post has been updated');
+        return redirect()->route('posts.index')->with('toast_info', 'Post has been updated');
     }
 
     /**
@@ -181,7 +181,7 @@ class PostController extends Controller
     {
         Post::findOrFail($id)->delete();
 
-        return redirect()->route('posts.index')->with('toast_info', 'Your post has been trashed');
+        return redirect()->route('posts.index')->with('toast_warning', 'Your post has been trashed');
     }
 
     /**

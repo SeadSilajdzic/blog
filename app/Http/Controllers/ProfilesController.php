@@ -106,7 +106,7 @@ class ProfilesController extends Controller
         $user->profile->github = $request->github;
         $user->profile->instagram = $request->instagram;
 
-        if($request->has('password')){
+        if($request->input('password')){
             $user->password = bcrypt($request->password);
         }
 
@@ -115,7 +115,7 @@ class ProfilesController extends Controller
 
 
 
-        return redirect()->back()->with('success', 'Profile has been updated!');
+        return redirect()->back()->with('toast_info', 'Your account has been updated');
     }
 
     /**

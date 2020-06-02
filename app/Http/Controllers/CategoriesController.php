@@ -109,7 +109,13 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        Category::findOrFail($id)->delete();
+        $category = Category::findOrFail($id);
+
+        foreach($category->posts as $post){
+            $post->forceDelete();
+        }
+
+        $category->delete();
 
         return redirect()->route('category.index')->with('toast_error', 'Category has been deleted');
     }
