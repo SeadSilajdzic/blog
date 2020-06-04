@@ -6,9 +6,9 @@
         Edit site settings
     </h2>
 
-    <form action="{{ route('settings.update') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('settings.update') }}" method="get" enctype="multipart/form-data">
         @csrf
-        @method('PATCH')
+        @method('PUT')
 
         <div class="form-group">
             <label for="site_name">Site name</label>

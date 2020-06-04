@@ -13,15 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('home');
-});
+Route::resource('/', 'FrontEndController');
+
+Route::get('/post/{slug}', [
+   'uses' => 'FrontEndController@singlePost',
+    'as' => 'post.single'
+]);
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+
+    Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('/posts/trash/{post}', [
        'uses' => 'PostController@trash',
