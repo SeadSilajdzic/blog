@@ -4,7 +4,7 @@
             <div class="logo">
                 <div class="logo-text">
                     <div class="logo-title">
-                        <a href="">{{ $settings->site_name }}</a>
+                        <a href="{{ url('/') }}">{{ $settings->site_name }}</a>
                     </div>
                 </div>
             </div>

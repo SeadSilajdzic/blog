@@ -27,7 +27,7 @@
                                     Posted by
 
                                     <div class="post__author-name fn">
-                                        <a href="#" class="post__author-link">Admin</a>
+                                        <a href="#" class="post__author-link">{{ $post->user->name }}</a>
                                     </div>
 
                                 </div>
@@ -63,22 +63,8 @@
                             </div>
                         </div>
 
-                        <div class="socials">Share:
-                            <a href="#" class="social__item">
-                                <i class="seoicon-social-facebook"></i>
-                            </a>
-                            <a href="#" class="social__item">
-                                <i class="seoicon-social-twitter"></i>
-                            </a>
-                            <a href="#" class="social__item">
-                                <i class="seoicon-social-linkedin"></i>
-                            </a>
-                            <a href="#" class="social__item">
-                                <i class="seoicon-social-google-plus"></i>
-                            </a>
-                            <a href="#" class="social__item">
-                                <i class="seoicon-social-pinterest"></i>
-                            </a>
+                        <div class="socials">
+                            <div class="addthis_inline_share_toolbox"></div>
                         </div>
 
                     </article>
@@ -86,35 +72,36 @@
                     <div class="blog-details-author">
 
                         <div class="blog-details-author-thumb">
-                            <img src="{{ asset('app/img/blog-details-author.png') }}" alt="Author">
+                            <img style="height: 100px; width: 100px; border-radius: 100%;" src="/{{ $post->user->profile->avatar }}" alt="Author">
                         </div>
 
                         <div class="blog-details-author-content">
                             <div class="author-info">
-                                <h5 class="author-name">Philip Demarco</h5>
-                                <p class="author-info">SEO Specialist</p>
+                                <h5 class="author-name">{{ $post->user->name }}</h5>
                             </div>
-                            <p class="text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                nonummy nibh euismod.
+                            <p class="text">{{ $post->user->profile->about }}
                             </p>
                             <div class="socials">
 
-                                <a href="#" class="social__item">
+                                <a href="{{ $post->user->profile->facebook }}" target="_blank" class="social__item">
                                     <img src="{{ asset('app/svg/circle-facebook.svg') }}" alt="facebook">
                                 </a>
 
-                                <a href="#" class="social__item">
-                                    <img src="{{ asset('app/svg/twitter.svg') }}" alt="twitter">
+                                <a href="{{ $post->user->profile->linkedin }}" target="_blank" class="social__item">
+                                    <img src="{{ asset('app/svg/linkedin.svg') }}" alt="linkedin">
                                 </a>
 
-                                <a href="#" class="social__item">
-                                    <img src="{{ asset('app/svg/google.svg') }}" alt="google">
-                                </a>
-
-                                <a href="#" class="social__item">
+                                <a href="{{ $post->user->profile->youtube }}" target="_blank" class="social__item">
                                     <img src="{{ asset('app/svg/youtube.svg') }}" alt="youtube">
                                 </a>
 
+                                <a href="{{ $post->user->profile->github }}" target="_blank" class="social__item">
+                                    <img src="{{ asset('app/svg/github.svg') }}" alt="github">
+                                </a>
+
+                                <a href="{{ $post->user->profile->instagram }}" target="_blank" class="social__item">
+                                    <img src="{{ asset('app/svg/instagram.svg') }}" alt="instagram">
+                                </a>
                             </div>
                         </div>
                     </div>
