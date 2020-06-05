@@ -3,7 +3,9 @@
         <div class="header-content-wrapper">
             <div class="logo">
                 <div class="logo-text">
-                    <div class="logo-title">{{ $settings->site_name }}</div>
+                    <div class="logo-title">
+                        <a href="">{{ $settings->site_name }}</a>
+                    </div>
                 </div>
             </div>
 
@@ -19,8 +21,8 @@
                 </a>
                 <ul class="primary-menu-menu" style="overflow: hidden;">
                     @foreach($categories as $category)
-                        <li class="">
-                            <a href="">{{ $category->name }}</a>
+                        <li >
+                            <a href="{{ route('category.single', ['id' => $category->id ]) }}">{{ $category->name }}</a>
                         </li>
                     @endforeach
                 </ul>

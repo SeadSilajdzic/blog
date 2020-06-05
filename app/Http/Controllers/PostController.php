@@ -124,6 +124,7 @@ class PostController extends Controller
            'title' => 'required|min:5|max:255',
            'content' => 'required|min:5',
            'category_id' => 'required',
+            'slug' => Str::slug($request->title),
         ]);
 
         $post = Post::findOrFail($id);
@@ -141,6 +142,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->content = $request->content;
         $post->category_id = $request->category_id;
+        $post->slug = Str::slug($request->title);
 
         $post->save();
 

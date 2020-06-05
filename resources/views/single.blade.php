@@ -15,7 +15,7 @@
                     <article class="hentry post post-standard-details">
 
                         <div class="post-thumb">
-                            <img src="{{ $post->featured }}" alt="{{ $post->title }} image">
+                            <img class="mx-auto d-block" src="{{ $post->featured }}" alt="{{ $post->title }} image">
                         </div>
 
                         <div class="post__content">
@@ -53,6 +53,13 @@
 
                                 {!! $post->content !!}
 
+                                <div class="widget w-tags">
+                                    <div class="tags-wrap">
+                                        @foreach($post->tags as $tag)
+                                            <a href="{{ route('tag.single', ['id' => $tag->id]) }}" class="w-tags-item">{{ $tag->tag }}</a>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -165,30 +172,30 @@
 
                 <!-- End Post Details -->
 
-                <!-- Sidebar-->
+{{--                <!-- Sidebar-->--}}
 
-                <div class="col-lg-12">
-                    <aside aria-label="sidebar" class="sidebar sidebar-right">
-                        <div  class="widget w-tags">
-                            <div class="heading text-center">
-                                <h4 class="heading-title">ALL BLOG TAGS</h4>
-                                <div class="heading-line">
-                                    <span class="short-line"></span>
-                                    <span class="long-line"></span>
-                                </div>
-                            </div>
+{{--                <div class="col-lg-12">--}}
+{{--                    <aside aria-label="sidebar" class="sidebar sidebar-right">--}}
+{{--                        <div  class="widget w-tags">--}}
+{{--                            <div class="heading text-center">--}}
+{{--                                <h4 class="heading-title">ALL BLOG TAGS</h4>--}}
+{{--                                <div class="heading-line">--}}
+{{--                                    <span class="short-line"></span>--}}
+{{--                                    <span class="long-line"></span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="tags-wrap">
-                                @foreach($post->tags as $tag)
-                                    <a href="#" class="w-tags-item">{{ $tag->tag }}</a>
-                                @endforeach
+{{--                            <div class="tags-wrap">--}}
+{{--                                @foreach($post->tags as $tag)--}}
+{{--                                    <a href="#" class="w-tags-item">{{ $tag->tag }}</a>--}}
+{{--                                @endforeach--}}
 
-                            </div>
-                        </div>
-                    </aside>
-                </div>
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </aside>--}}
+{{--                </div>--}}
 
-                <!-- End Sidebar-->
+{{--                <!-- End Sidebar-->--}}
 
             </main>
         </div>

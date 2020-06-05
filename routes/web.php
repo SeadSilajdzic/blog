@@ -13,12 +13,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('/', 'FrontEndController');
-
 Route::get('/post/{slug}', [
-   'uses' => 'FrontEndController@singlePost',
+    'uses' => 'FrontEndController@singlePost',
     'as' => 'post.single'
 ]);
+
+Route::get('/category/{id}', [
+    'uses' => 'FrontEndController@category',
+    'as' => 'category.single'
+]);
+
+Route::get('tag/{id}', [
+    'uses' => 'FrontEndController@tag',
+    'as' => 'tag.single'
+]);
+
+Route::get('/results', function(){
+    $posts = \App\Post::where('title','like',  '%' . request('query') . '%')->get();
+    $query = request('query');
+    dd($query);
+
+    return view('results')->with('posts', $posts)
+        ->with('title', 'Search results : ' . request('query'))
+        ->with('settings', \App\Setting::first())
+        ->with('categories', \App\Category::take(6)->get())
+        ->with('query', request('query'));
+});
+
+Route::resource('/', 'FrontEndController');
 
 Auth::routes();
 

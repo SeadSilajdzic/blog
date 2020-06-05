@@ -83,7 +83,7 @@
 
                                 <span class="category">
                                             <i class="seoicon-tags"></i>
-                                            <a href="#">{{ $first_post->category->name }}</a>
+                                            <a href="{{ route('category.single', ['id' => $first_post->category->id]) }}">{{ $first_post->category->name }}</a>
                                         </span>
 
                                 <span class="post__comments">
@@ -137,7 +137,7 @@
 
                                 <span class="category">
                                             <i class="seoicon-tags"></i>
-                                            <a href="#">{{ $first_post->category->name }}</a>
+                                            <a href="{{ route('category.single', ['id' => $second_post->category->id]) }}">{{ $second_post->category->name }}</a>
                                         </span>
 
                                 <span class="post__comments">
@@ -187,7 +187,7 @@
 
                                 <span class="category">
                                             <i class="seoicon-tags"></i>
-                                            <a href="#">{{ $first_post->category->name }}</a>
+                                            <a href="{{ route('category.single', ['id' => $third_post->category->id]) }}">{{ $third_post->category->name }}</a>
                                         </span>
 
                                 <span class="post__comments">
@@ -258,7 +258,7 @@
                                     <span class="semicircle--right"></span>
                                 </button>
                             </form>
-                            <div class="sub-title">Sign up for new Seosignt content, updates, surveys & offers.</div>
+                            <div class="sub-title">Sign up for new {{ $post->title }} content, updates, surveys & offers.</div>
 
                         </div>
 
