@@ -15,7 +15,7 @@ Available for employment ☑
 
 
 <h2>---About Project---</h2>
-This project is my portfolio and I decided to upload it here so You can see mine whole progress while I made this site work. I have included all basic and some more advanced stuff that the most of the sites need in a production. All future updates will also be uploaded here and marked so new developers can use this site as a guide on how to create one nice and functional site.
+This project is including all basic parts of every website and I decided to upload it here so You can see mine whole progress while I made this site work. I have included all basic and some more advanced stuff that most of the sites need in production. All future updates will also be uploaded here and marked so new developers can use this site as a guide on how to create one nice and functional site.
 
 I hope You will like it :) <br> <br>
 Thanks for Your time
