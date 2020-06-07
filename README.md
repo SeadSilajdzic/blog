@@ -39,3 +39,4 @@ Editor used:
 <h2>---Future plans and projects---</h2>
 In the nearest future, my goal is to advertise myself much more over social media, publish more sites on my Github account (just designs without any other technologies in the background and designed sites with PHP background) and as the main goal for this year will be creating a platform for a small online community ⛄.
 Also one of my main priorities will be improving my JavaScript skills in terms of web design.
+

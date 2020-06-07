@@ -19,19 +19,32 @@ class FrontEndController extends Controller
     {
         $title = Setting::first()->site_name;
         $categories = Category::take(6)->get();
-        $first_post = Post::orderBy('created_at', 'desc')->first();
-        $second_post = Post::orderBy('created_at', 'desc')->skip(1)->take(1)->get()->first();
-        $third_post = Post::orderBy('created_at', 'desc')->skip(2)->take(1)->get()->first();
         $settings = Setting::first();
+//        dd(Post::all()->count());
+        if(Post::all()->count() > 3){
+            $first_post = Post::orderBy('created_at', 'desc')->first();
+            $second_post = Post::orderBy('created_at', 'desc')->skip(1)->take(1)->get()->first();
+            $third_post = Post::orderBy('created_at', 'desc')->skip(2)->take(1)->get()->first();
 
-        return view('index', [
-            'title' => $title,
-            'categories' => $categories,
-            'first_post' => $first_post,
-            'second_post' => $second_post,
-            'third_post' => $third_post,
-            'settings' => $settings
-        ]);
+            return view('index', [
+                'title' => $title,
+                'categories' => $categories,
+                'first_post' => $first_post,
+                'second_post' => $second_post,
+                'third_post' => $third_post,
+                'settings' => $settings
+            ]);
+        } else {
+            return view('error', [
+                'title' => $title,
+                'categories' => $categories,
+                'settings' => $settings
+            ]);
+        }
+
+
+
+
 
     }
 

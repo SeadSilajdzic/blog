@@ -134,11 +134,6 @@
                                         Settings
                                     </a>
                                 </li>
-                            @else
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('posts.index') }}">Blog</a>
-                                </li>
 
                             @endif
 
