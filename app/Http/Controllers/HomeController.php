@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'admin']);
     }
 
     /**
@@ -32,7 +32,7 @@ class HomeController extends Controller
         $users_count = User::all()->count();
         $categories_count = Category::all()->count();
 
-        return view('dashboard', [
+        return view('admin.dashboard', [
             'posts_count' => $posts_count,
             'trashed_count' => $trashed_count,
             'users_count' => $users_count,

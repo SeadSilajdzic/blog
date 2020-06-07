@@ -41,11 +41,6 @@ class FrontEndController extends Controller
                 'settings' => $settings
             ]);
         }
-
-
-
-
-
     }
 
     public function singlePost($slug)

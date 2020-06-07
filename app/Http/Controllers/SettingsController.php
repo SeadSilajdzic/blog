@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index(){
         $settings = Setting::first();
         return view('admin.settings.settings', ['settings' => $settings]);

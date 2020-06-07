@@ -38,6 +38,9 @@
                     @endguest
 
                     @auth
+                        @if(Auth::user()->admin)
+                            <li class="nav-item"><a href="{{ url('admin/dashboard') }}" class="nav-link">Dashboard</a></li>
+                        @endif
                         <li class="nav-item"><a class="nav-link" href="{{ route('profile.index') }}">Profile</a></li>
 
                         <li class="nav-item">
