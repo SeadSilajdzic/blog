@@ -2,7 +2,13 @@
 <html lang="en">
 <head lang="en">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Sead Silajdzic">
+    <meta name="description" content="Blog for everyone connected or interested in any kind of art.">
+    <meta name="keywords" content="blogger, art, art blog, blog, art news, art info">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <link rel="icon" href="{{ asset('uploads/favico/artboard.svg') }}">
     <title>{{ $settings->site_name }}</title>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/fonts.css') }}">
